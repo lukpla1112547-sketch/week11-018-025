@@ -44,35 +44,65 @@ st.markdown("""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
   html, body, [class*="css"] { font-family: 'Kanit','Leelawadee UI',Tahoma,sans-serif; }
-  .stApp { background-color: #F8FAFC; color-scheme: light; }
-  .hero-container {
+
+  /* ── ล็อกพื้นหลังให้เป็นโหมดสว่างเสมอ (ผู้ใช้ที่ตั้งเครื่องเป็น dark mode ก็อ่านได้) ── */
+  [data-testid="stAppViewContainer"], .stApp, [data-testid="stMain"], section.main {
+      background-color: #F8FAFC !important; color-scheme: light !important; }
+  [data-testid="stHeader"] { background: transparent !important; }
+  [data-testid="stSidebar"] { background-color: #FFFFFF !important; border-right: 1px solid #E2E8F0 !important; }
+  [data-testid="stSidebar"] > div { background-color: #FFFFFF !important; }
+  [data-testid="stBottom"] > div, [data-testid="stBottomBlockContainer"] { background-color: #F8FAFC !important; }
+
+  /* ── ล็อกสีตัวหนังสือทุกประเภทเป็นโทนเข้ม อ่านชัดบนพื้นสว่าง ── */
+  [data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li,
+  [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2,
+  [data-testid="stMarkdownContainer"] h3, [data-testid="stMarkdownContainer"] h4,
+  [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] *,
+  [data-testid="stExpander"] summary, [data-testid="stExpander"] p,
+  [data-testid="stDataFrame"] *, [data-testid="stAlert"], [data-testid="stAlert"] *,
+  [data-baseweb="select"] *, [data-baseweb="input"] input,
+  .stApp input, .stApp textarea, .stApp small,
+  [role="tab"], [role="tab"] * { color: #0F172A !important; }
+  [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] * { color: #475569 !important; }
+  [data-testid="stSliderThumbValue"], [data-testid="stSliderThumbValue"] *,
+  [data-testid="stSliderTickBarMin"], [data-testid="stSliderTickBarMax"] { color: #0F172A !important; }
+  [role="tab"][aria-selected="true"], [role="tab"][aria-selected="true"] * { color: #1D4ED8 !important; }
+  .stApp code, .stApp pre { color: #0F172A !important; background: #F1F5F9 !important; }
+
+  /* ── กล่อง/การ์ดของทีม (ใส่ .stApp นำหน้าเพื่อให้ความสำคัญสูงกว่ากฎด้านบน) ── */
+  .stApp .hero-container {
       background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #2563EB 100%);
-      padding: 2.2rem 2rem 1.8rem; border-radius: 20px; color: #fff;
+      padding: 2.2rem 2rem 1.8rem; border-radius: 20px;
       box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4); margin-bottom: 22px;
   }
-  .hero-title { font-size: 2.3rem; font-weight: 700; margin: 0; color: #FFFFFF !important; letter-spacing: -0.5px; }
-  .hero-subtitle { font-size: 1.05rem; font-weight: 300; color: #BFDBFE !important; margin-top: 8px; }
+  .stApp .hero-title, .stApp .hero-title * {
+      font-size: 2.3rem; font-weight: 700; margin: 0; color: #FFFFFF !important; letter-spacing: -0.5px; }
+  .stApp .hero-subtitle, .stApp .hero-subtitle * {
+      font-size: 1.05rem; font-weight: 300; color: #DBEAFE !important; margin-top: 8px; }
+  .stApp .hero-subtitle b { color: #FFFFFF !important; }
   .chips { margin-top: 14px; }
-  .chip { display:inline-block; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.32);
+  .stApp .chip { display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
           padding:6px 14px; border-radius:999px; font-size:.85rem; margin:0 8px 8px 0; color:#FFFFFF !important; }
-  .chip.solid { background:#FFFFFF; color:#1E3A8A !important; font-weight:700; }
-  .team-card { background:#FFFFFF; padding:16px; border-radius:16px; border:1px solid #E2E8F0;
+  .stApp .chip.solid { background:#FFFFFF; color:#1E3A8A !important; font-weight:700; }
+  .stApp .team-card { background:#FFFFFF; padding:16px; border-radius:16px; border:1px solid #E2E8F0;
                box-shadow:0 4px 12px rgba(0,0,0,.03); margin-bottom:18px; }
-  .team-header { font-size:.95rem; font-weight:700; color:#1E293B !important;
+  .stApp .team-header { font-size:.95rem; font-weight:700; color:#1E293B !important;
                  border-bottom:2px solid #3B82F6; padding-bottom:6px; margin-bottom:10px; }
-  .team-member { font-size:.9rem; color:#334155 !important; padding:4px 0; }
+  .stApp .team-member, .stApp .team-member * { font-size:.9rem; color:#334155 !important; padding:4px 0; }
   div.stFormSubmitButton > button, div.stButton > button {
-      background: linear-gradient(90deg,#2563EB 0%,#1D4ED8 100%) !important; color:#fff !important;
+      background: linear-gradient(90deg,#2563EB 0%,#1D4ED8 100%) !important;
       font-size:1.1rem !important; font-weight:600 !important; padding:12px 26px !important;
       border-radius:14px !important; border:none !important;
       box-shadow:0 10px 20px -5px rgba(37,99,235,.4) !important; }
-  .card-satisfied { background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%);
+  div.stFormSubmitButton > button p, div.stButton > button p, div.stFormSubmitButton > button * ,
+  div.stButton > button * { color: #FFFFFF !important; }
+  .stApp .card-title { font-size:1.25rem; font-weight:700; margin-bottom:6px; }
+  .stApp .card-desc, .stApp .card-desc * { font-size:.95rem; color:#334155 !important; line-height:1.6; }
+  .stApp .card-satisfied { background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%);
       border-left:8px solid #10B981; padding:20px; border-radius:16px; }
-  .card-dissatisfied { background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%);
+  .stApp .card-dissatisfied { background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%);
       border-left:8px solid #EF4444; padding:20px; border-radius:16px; }
-  .card-title { font-size:1.25rem; font-weight:700; margin-bottom:6px; }
-  .card-desc { font-size:.95rem; color:#475569 !important; line-height:1.6; }
-  .metric-card { background:#FFFFFF; border-radius:16px; padding:18px; border:1px solid #E2E8F0;
+  .stApp .metric-card { background:#FFFFFF; border-radius:16px; padding:18px; border:1px solid #E2E8F0;
       text-align:center; box-shadow:0 4px 12px rgba(0,0,0,.03); }
   [data-testid="stMetric"] { background:#FFFFFF; border:1px solid #E2E8F0; border-radius:14px; padding:12px 16px; }
   [data-testid="stMetricValue"], [data-testid="stMetricValue"] * { color:#1E3A8A !important; }
