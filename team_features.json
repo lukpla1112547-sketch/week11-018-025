@@ -1,0 +1,207 @@
+{
+  "team": "อดทนจนกว่าจะแลนด์",
+  "team_code": "018-025",
+  "members": [
+    [
+      "018",
+      "ณิชกุล ทิพยอาสน์"
+    ],
+    [
+      "025",
+      "พรสุดา สว่างศรี"
+    ]
+  ],
+  "project": "AI ทำนายความพึงพอใจผู้โดยสารสายการบิน (Airline Passenger Satisfaction)",
+  "course": "DT36822N ปัญญาประดิษฐ์เพื่อธุรกิจดิจิทัล",
+  "dataset": "Airline Passenger Satisfaction — ผู้โดยสาร 103,902 ราย",
+  "model": "Random Forest (100 ต้น) เทรนบน 7 ช่องกรอกที่ GA คัดเลือก",
+  "features": [
+    "Inflight wifi service",
+    "Online boarding",
+    "Seat comfort",
+    "Inflight entertainment",
+    "Baggage handling",
+    "Customer Type_Loyal Customer",
+    "Type of Travel_Business travel"
+  ],
+  "feature_importance": {
+    "Online boarding": 0.27268,
+    "Inflight wifi service": 0.22219,
+    "Type of Travel_Business travel": 0.205427,
+    "Inflight entertainment": 0.106391,
+    "Seat comfort": 0.069094,
+    "Customer Type_Loyal Customer": 0.067516,
+    "Baggage handling": 0.056701
+  },
+  "n_rows": 103902,
+  "satisfied_rate": 0.4333,
+  "test_accuracy": 0.9475,
+  "precision": 0.9427,
+  "recall": 0.9356,
+  "f1": 0.9391,
+  "cv_accuracy": 0.9435,
+  "baseline_all_features_acc": 0.9623,
+  "ga_baseline_on_26": 0.9371,
+  "ga_on_26": 0.9367,
+  "ga_columns_selected": 8,
+  "ga_search_space": 26,
+  "compare_table": [
+    {
+      "โมเดล": "Random Forest (100 ต้น)",
+      "ความแม่น 22 ฟีเจอร์ (%)": 96.23,
+      "ความแม่น 7 ช่องกรอก (%)": 94.75,
+      "F1 (7 ช่องกรอก)": 0.9391,
+      "ต่าง (จุด)": -1.48
+    },
+    {
+      "โมเดล": "SVM rbf (+StandardScaler)",
+      "ความแม่น 22 ฟีเจอร์ (%)": 95.59,
+      "ความแม่น 7 ช่องกรอก (%)": 94.24,
+      "F1 (7 ช่องกรอก)": 0.9323,
+      "ต่าง (จุด)": -1.35
+    },
+    {
+      "โมเดล": "Neural Network (MLP 32-16)",
+      "ความแม่น 22 ฟีเจอร์ (%)": 95.92,
+      "ความแม่น 7 ช่องกรอก (%)": 94.39,
+      "F1 (7 ช่องกรอก)": 0.9344,
+      "ต่าง (จุด)": -1.53
+    },
+    {
+      "โมเดล": "Decision Tree (max_depth=8)",
+      "ความแม่น 22 ฟีเจอร์ (%)": 93.58,
+      "ความแม่น 7 ช่องกรอก (%)": 93.67,
+      "F1 (7 ช่องกรอก)": 0.9258,
+      "ต่าง (จุด)": 0.09
+    },
+    {
+      "โมเดล": "Naive Bayes",
+      "ความแม่น 22 ฟีเจอร์ (%)": 86.71,
+      "ความแม่น 7 ช่องกรอก (%)": 87.56,
+      "F1 (7 ช่องกรอก)": 0.8529,
+      "ต่าง (จุด)": 0.85
+    },
+    {
+      "โมเดล": "Dummy (ทายคลาสใหญ่)",
+      "ความแม่น 22 ฟีเจอร์ (%)": 56.67,
+      "ความแม่น 7 ช่องกรอก (%)": 56.67,
+      "F1 (7 ช่องกรอก)": 0.0,
+      "ต่าง (จุด)": 0.0
+    }
+  ],
+  "experiments": {
+    "all_features": [
+      {
+        "model": "Dummy (ทายคลาสใหญ่)",
+        "n_features": 22,
+        "test_acc": 0.5667,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "seconds": 0.0
+      },
+      {
+        "model": "Random Forest (100 ต้น)",
+        "n_features": 22,
+        "test_acc": 0.9623,
+        "precision": 0.9671,
+        "recall": 0.9453,
+        "f1": 0.956,
+        "seconds": 1.6
+      },
+      {
+        "model": "Decision Tree (max_depth=8)",
+        "n_features": 22,
+        "test_acc": 0.9358,
+        "precision": 0.9286,
+        "recall": 0.9227,
+        "f1": 0.9256,
+        "seconds": 0.4
+      },
+      {
+        "model": "SVM rbf (+StandardScaler)",
+        "n_features": 22,
+        "test_acc": 0.9559,
+        "precision": 0.9565,
+        "recall": 0.9409,
+        "f1": 0.9487,
+        "seconds": 90.8
+      },
+      {
+        "model": "Neural Network (MLP 32-16)",
+        "n_features": 22,
+        "test_acc": 0.9592,
+        "precision": 0.9606,
+        "recall": 0.9447,
+        "f1": 0.9526,
+        "seconds": 6.4
+      },
+      {
+        "model": "Naive Bayes",
+        "n_features": 22,
+        "test_acc": 0.8671,
+        "precision": 0.8594,
+        "recall": 0.8289,
+        "f1": 0.8439,
+        "seconds": 0.1
+      }
+    ],
+    "ga_features": [
+      {
+        "model": "Dummy (ทายคลาสใหญ่)",
+        "n_features": 7,
+        "test_acc": 0.5667,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "seconds": 0.0
+      },
+      {
+        "model": "Random Forest (100 ต้น)",
+        "n_features": 7,
+        "test_acc": 0.9475,
+        "precision": 0.9427,
+        "recall": 0.9356,
+        "f1": 0.9391,
+        "seconds": 0.7
+      },
+      {
+        "model": "Decision Tree (max_depth=8)",
+        "n_features": 7,
+        "test_acc": 0.9367,
+        "precision": 0.9405,
+        "recall": 0.9115,
+        "f1": 0.9258,
+        "seconds": 0.1
+      },
+      {
+        "model": "SVM rbf (+StandardScaler)",
+        "n_features": 7,
+        "test_acc": 0.9424,
+        "precision": 0.9492,
+        "recall": 0.9159,
+        "f1": 0.9323,
+        "seconds": 46.9
+      },
+      {
+        "model": "Neural Network (MLP 32-16)",
+        "n_features": 7,
+        "test_acc": 0.9439,
+        "precision": 0.9475,
+        "recall": 0.9216,
+        "f1": 0.9344,
+        "seconds": 5.9
+      },
+      {
+        "model": "Naive Bayes",
+        "n_features": 7,
+        "test_acc": 0.8756,
+        "precision": 0.8746,
+        "recall": 0.8322,
+        "f1": 0.8529,
+        "seconds": 0.0
+      }
+    ]
+  },
+  "note": "GA ค้นหาบน 26 คอลัมน์ที่เข้ารหัสแล้ว เลือกมา 8 คอลัมน์ โดย Customer Type ถูก one-hot เป็น 2 คอลัมน์ (Loyal / disloyal) ซึ่งในแอปยุบเป็นดรอปดาวน์เดียว จึงเหลือ 7 ช่องกรอก"
+}
